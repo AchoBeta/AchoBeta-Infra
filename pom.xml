@@ -13,6 +13,7 @@
     <version>1.0-INFRA</version>
     <name>achobeta-infra</name>
     <modules>
+        <module>achobeta-infra-common</module>
         <module>achobeta-infra-gateway</module>
         <module>achobeta-infra-oauth</module>
     </modules>
@@ -23,5 +24,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
-
+    <dependencies>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 </project>
