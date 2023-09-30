@@ -4,9 +4,11 @@ INPUT_FILE=$1
 HEADER=$(head -n1 "$INPUT_FILE")
 
 PATTERN="^(feat|fix|docs|style|refactor|perf|test|chore)(\(.+\))?: .{1,50}"
+# shellcheck disable=SC2034
+MERGE_PATTERN="^(Merge ).+( branch )+.+( into )+"
 
 # shellcheck disable=SC2039
-if [[ "$HEADER" =~ $PATTERN ]]; then
+if [[ "$HEADER" =~ $PATTERN || "$HEADER" =~ $MERGE_PATTERN ]]; then
   exit 0
 fi
 
@@ -15,6 +17,6 @@ function err_print() {
   echo "\033[0;31m$1\033[0m"
 }
 
-err_print "commit message '$HEADER' does not match the pattern: $PATTERN"
+err_print "commit message '$HEADER' \ndoes not match the pattern: [$PATTERN] or [$MERGE_PATTERN]"
 
 exit 1
