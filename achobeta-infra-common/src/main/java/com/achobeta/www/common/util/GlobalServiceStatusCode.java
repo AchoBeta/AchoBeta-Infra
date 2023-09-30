@@ -3,13 +3,14 @@ package com.achobeta.www.common.util;
 import lombok.Getter;
 
 /**
- * <p>
- *     global service status code,
- *     Please note that status code definitions are module-specific
- *     and do not occupy other business modules when defining them.
- * </p>
+ * <span>
+ * <h3> global service status code </h3>
+ * Please note that status code definitions are module-specific
+ * and do not occupy other business modules when defining them.
+ * </span>
+ *
+ * @author jettcc in 2023/10/1
  * @version 1.0
- * @author jettcc in 2023/9/30
  */
 @Getter
 public enum GlobalServiceStatusCode {
@@ -41,8 +42,7 @@ public enum GlobalServiceStatusCode {
     USER_NO_PERMISSION(2403, "用户无权限"),
     USER_NO_PHONE_CODE(2500, "验证码错误"),
 
-    /* -------------- */
-    ;
+    /* -------------- */;
 
     private final Integer code;
     private final String message;
