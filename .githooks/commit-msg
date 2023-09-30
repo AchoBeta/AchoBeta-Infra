@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+INPUT_FILE=$1
+HEADER=$(head -n1 "$INPUT_FILE")
+
+PATTERN="^(feat|fix|docs|style|refactor|perf|test|chore)(\(.+\))?: .{1,50}"
+
+# shellcheck disable=SC2039
+if [[ "$HEADER" =~ $PATTERN ]]; then
+  exit 0
+fi
+
+# shellcheck disable=SC2112
+function err_print() {
+  echo "\033[0;31m$1\033[0m"
+}
+
+err_print "commit message '$HEADER' does not match the pattern: $PATTERN"
+
+exit 1
