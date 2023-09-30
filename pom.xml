@@ -13,6 +13,7 @@
     <version>1.0-INFRA</version>
     <name>achobeta-infra</name>
     <modules>
+        <module>achobeta-infra-common</module>
         <module>achobeta-infra-gateway</module>
         <module>achobeta-infra-oauth</module>
     </modules>
