@@ -9,9 +9,9 @@ git config core.hooksPath .githooks
 chmod -R -x .githooks 
 ```
 
-以上命令的作用是在于提交代码后 pr 合并会触发 hook 自动删除自定义分支
+The purpose of the above command is to trigger hook to automatically delete the custom branch after the PR merge after submitting the code
 
-# commit message 格式
+# commit message format
 
 ```bash
 <type>(<scope>): <subject>
@@ -19,22 +19,20 @@ chmod -R -x .githooks
 
 ## type
 
-feat：新功能（feature）
+feat: feature
 
-fix：修复bug，可以是QA发现的BUG，也可以是研发自己发现的BUG
+fix: fix bug
 
-docs：文档（documentation）
+docs: documentation
 
-test：增加测试
+test: add test function
 
 ## subject
 
-1. 结尾不加句号或其他标点符号
-2. 中英文之间需要加空格
+No period or punctuation at the end
 
-例如:
+e.g.
 ```bash
 feat: add new feature
 fix: fix a bug
-test: 实现 Service 层单元测试
 ```
