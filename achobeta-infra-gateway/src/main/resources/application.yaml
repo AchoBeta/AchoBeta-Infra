@@ -7,6 +7,8 @@ spring:
     # case 'reactive' : processing requests in non-blocking mode
     # case 'servlet' : is blocking mode
     web-application-type: reactive
+  application:
+    name: achobeta-infra-gateway
 
 
 
