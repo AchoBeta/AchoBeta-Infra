@@ -6,12 +6,15 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 
 /**
+ * <span>
+ * 统一数据返回,采用了LinkedHashMap的方式，不会造成多余字段
  * <p>
- *  统一数据返回,采用了LinkedHashMap的方式，不会造成多余字段
- *  code: {@link GlobalServiceStatusCode}
+ * code: {@link GlobalServiceStatusCode}
  * </p>
+ * </span>
  *
  * @author jettcc in 2023/09/30
+ * @version 1.0
  */
 @NoArgsConstructor
 public class SystemJsonResponse extends LinkedHashMap<String, Object> {

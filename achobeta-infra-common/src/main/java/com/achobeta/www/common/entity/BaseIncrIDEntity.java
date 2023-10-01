@@ -8,9 +8,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
 
 /**
- * @date: 2023/9/30
- * @author: jettcc
- * @desc: classes that inherit this entity all have auto-incrementing ID.
+ * <span>
+ * classes that inherit this entity all have auto-incrementing ID.
+ * </span>
+ *
+ * @author jettcc in 2023/10/1
+ * @version 1.0
  */
 @Getter
 @Setter
@@ -43,7 +46,7 @@ public class BaseIncrIDEntity {
     @Version
     private Integer version;
 
-    @TableField(value = "c_is_deleted",fill = FieldFill.INSERT)
+    @TableField(value = "c_is_deleted", fill = FieldFill.INSERT)
     @TableLogic
     private Integer deleted;
 }
