@@ -21,7 +21,29 @@ spring:
 
 # Default port number, not to change it,
 # if you need to change it for debugging,
-# you can add the startup parameter "-Dserver.port=(number)"
+# you can add the startup parameter, e.g.:"-Dserver.port=(number)"
 # or create local config file to "application-local.yaml"
 server:
   port: 4396
+  tomcat:
+    basedir: ./
+    accesslog:
+      buffered: false
+      directory: logs
+      enabled: true
+      file-date-format: .yyyy-MM-dd
+      pattern: '%h %l %u %t "%r" %s"%{Referer}i" "%{User-Agent}i" %D %{x-request-id}r %{user-id}r %{resource-id}r'
+      prefix: access_log
+      rename-on-rotate: true
+      request-attributes-enabled: false
+      rotate: true
+      suffix: .log
+
+# logger 配置
+logging:
+  level:
+    root: info
+    com:
+      achobeta:
+        www:
+          gateway: debug
