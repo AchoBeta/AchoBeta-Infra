@@ -42,6 +42,9 @@ public enum GlobalServiceStatusCode {
     USER_NO_PERMISSION(2403, "用户无权限"),
     USER_NO_PHONE_CODE(2500, "验证码错误"),
 
+    /* 网关层错误 3001-4000 */
+    GATEWAY_JWS_PARSER_ERROR(3001, "网关层格式错误，无法解析"),
+    GATEWAY_TOKEN_PARSER_ERROR(3002, "网关层token解析失败")
     /* -------------- */;
 
     private final Integer code;

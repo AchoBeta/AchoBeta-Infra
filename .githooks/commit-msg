@@ -5,7 +5,7 @@ HEADER=$(head -n1 "$INPUT_FILE")
 
 PATTERN="^(feat|fix|docs|style|refactor|perf|test|chore)(\(.+\))?: .{1,50}"
 # shellcheck disable=SC2034
-MERGE_PATTERN="^(Merge ).+( branch )+.+( into )+"
+MERGE_PATTERN="^(Merge ).{0,100}(branch )+.+( into )+"
 
 # shellcheck disable=SC2039
 if [[ "$HEADER" =~ $PATTERN || "$HEADER" =~ $MERGE_PATTERN ]]; then
