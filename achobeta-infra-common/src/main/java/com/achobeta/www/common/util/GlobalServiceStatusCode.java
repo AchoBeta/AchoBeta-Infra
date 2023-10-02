@@ -17,7 +17,7 @@ public enum GlobalServiceStatusCode {
     /* 成功, 默认200 */
     SYSTEM_SUCCESS(200, "操作成功"),
 
-    /* 系统错误 500 - 1000 */
+    /* 系统错误, 暂时不做数字区间约束 */
     SYSTEM_SERVICE_FAIL(-4396, "操作失败"),
     SYSTEM_SERVICE_ERROR(-500, "系统异常"),
     SYSTEM_TIME_OUT(-1, "请求超时"),
