@@ -29,9 +29,12 @@ import static com.achobeta.www.common.util.GlobalServiceStatusCode.*;
  */
 @Component
 public class GlobalRequestInterceptor implements GlobalFilter {
+    private static final String AUTHORIZATION_HEADER = "Authorization";
+    private static final String BEARER_PREFIX = "Bearer ";
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        var token = exchange.getRequest().getHeaders().getFirst("Authorization");
+        var token = exchange.getRequest().getHeaders().getFirst(AUTHORIZATION_HEADER);
         if (StringUtil.isNullOrEmpty(token)) {
             return chain.filter(exchange);
         }
@@ -39,7 +42,7 @@ public class GlobalRequestInterceptor implements GlobalFilter {
         // obtain the token in the request header and parse the data after removing the 'Bearer '
         String userJson;
         try {
-            userJson = JWSObject.parse(token.replace("Bearer ", ""))
+            userJson = JWSObject.parse(token.replace(BEARER_PREFIX, ""))
                     .getPayload().toString();
         } catch (ParseException e) {
             throw new JWSParseException(GATEWAY_JWS_PARSER_ERROR, e);
