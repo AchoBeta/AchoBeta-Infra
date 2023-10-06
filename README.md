@@ -1,6 +1,8 @@
 # AchoBeta-infra
 achobeta team infrastructure service
 
+<a href="./README_CN.md"><b> 简体中文 </b></a>
+
 # before develop
 
 1. execute command in the root directory
@@ -17,7 +19,7 @@ chmod -R 777 /docker/elk/elasticsearch/data /docker/elk/elasticsearch/logs
 ```
 + For data/logs directory, please execute the above command to give reading and writing permissions, otherwise ES will not be written into the data
 
-3. **Read the development specifications below**
+2. **Read the development specifications below**
 
 # branch naming convention
 we must confirm:

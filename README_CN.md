@@ -10,9 +10,17 @@ git config core.hooksPath .githooks
 chmod -R -x .githooks 
 ```
 
-上述命令的目的是在 git 提交时触发钩子以确认提交消息格式是否正确。
++ 上述命令的目的是在 git 提交时触发钩子以确认提交消息格式是否正确。
 
-2.**请阅读下面的开发规范**
+如果您想要通过 docker 部署 elk 服务组件，请看下面内容
+
+```shell
+chmod -R 777 /docker/elk/elasticsearch/data /docker/elk/elasticsearch/logs
+```
+
++ 数据/日志目录需要执行上述命令, 否则 es 无法读取数据文件
+
+2. **请阅读下面的开发规范**
 
 # 分支命名约定
 必须确保:
