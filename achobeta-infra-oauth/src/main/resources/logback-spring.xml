@@ -46,7 +46,20 @@
             <fileNamePattern>logs/oauth/error_oauth.%d.log</fileNamePattern>
         </rollingPolicy>
     </appender>
+
+    <springProperty scope="context" name="appName" source="spring.application.name"/>
+
+    <!--输出到logstash的appender-->
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <!--可以访问的logstash日志收集端口-->
+        <destination>119.91.133.80:4560</destination>
+        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"spring.application.name":"${appName}"}</customFields>
+        </encoder>
+    </appender>
+
     <root level="info">
+        <appender-ref ref="logstash"/>
         <appender-ref ref="consoleLog" />
         <appender-ref ref="fileInfoLog" />
         <appender-ref ref="fileErrorLog" />

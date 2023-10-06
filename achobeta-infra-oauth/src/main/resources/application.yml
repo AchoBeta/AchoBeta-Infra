@@ -1,3 +1,28 @@
+spring:
+  profiles:
+    # debug in local, use application-local.yaml
+    default: local
+  main:
+    # specify the type of gateway application
+    # case 'reactive' : processing requests in non-blocking mode
+    # case 'servlet' : is blocking mode
+    web-application-type: reactive
+  application:
+    name: achobeta-infra-oauth
+
+
+
+
+
+
+
+
+# ---------------------------- Try not to modify the following configurations ----------------------------
+
+# Default port number, not to change it,
+# if you need to change it for debugging,
+# you can add the startup parameter, e.g.:"-Dserver.port=(number)"
+# or create local config file to "application-local.yaml"
 server:
   port: 8989
   tomcat:
