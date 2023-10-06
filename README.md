@@ -1,6 +1,8 @@
 # AchoBeta-infra
 achobeta team infrastructure service
 
+<a href="./README_CN.md"><b> 简体中文 </b></a>
+
 # before develop
 
 1. execute command in the root directory
