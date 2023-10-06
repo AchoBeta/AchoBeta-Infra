@@ -4,12 +4,20 @@ achobeta team infrastructure service
 # before develop
 
 1. execute command in the root directory
+
 ```shell
 git config core.hooksPath .githooks 
 chmod -R -x .githooks 
 ```
-The purpose of the above command is to trigger a hook when submitting a commit to confirm whether the commit message is correct.
-2. **Read the development specifications below**
++ The purpose of the above command is to trigger a hook when submitting a commit to confirm whether the commit message is correct.
+
+If you want to deploy the ELK service component via docker, please see the following content
+```shell
+chmod -R 777 /docker/elk/elasticsearch/data /docker/elk/elasticsearch/logs
+```
++ For data/logs directory, please execute the above command to give reading and writing permissions, otherwise ES will not be written into the data
+
+3. **Read the development specifications below**
 
 # branch naming convention
 we must confirm:
