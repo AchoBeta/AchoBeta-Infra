@@ -1,14 +1,24 @@
 # AchoBeta-infra
 achobeta team infrastructure service
 
+<a href="./README_CN.md"><b> 简体中文 </b></a>
+
 # before develop
 
 1. execute command in the root directory
+
 ```shell
 git config core.hooksPath .githooks 
 chmod -R -x .githooks 
 ```
-The purpose of the above command is to trigger a hook when submitting a commit to confirm whether the commit message is correct.
++ The purpose of the above command is to trigger a hook when submitting a commit to confirm whether the commit message is correct.
+
+If you want to deploy the ELK service component via docker, please see the following content
+```shell
+chmod -R 777 /docker/elk/elasticsearch/data /docker/elk/elasticsearch/logs
+```
++ For data/logs directory, please execute the above command to give reading and writing permissions, otherwise ES will not be written into the data
+
 2. **Read the development specifications below**
 
 # branch naming convention
