@@ -10,11 +10,16 @@ spring:
   application:
     name: achobeta-infra-gateway
 
-
-
-
-
-
+# Whitelist
+gateway:
+  whitelist:
+    urls:
+      - "/v0/**"
+      - "/auth/oauth/token"
+      - "/swagger**/**"
+      - "/webjars/**"
+      - "/doc.html"
+      - "/*/*/api-docs"
 
 
 # ---------------------------- Try not to modify the following configurations ----------------------------
@@ -47,3 +52,4 @@ logging:
       achobeta:
         www:
           gateway: debug
+

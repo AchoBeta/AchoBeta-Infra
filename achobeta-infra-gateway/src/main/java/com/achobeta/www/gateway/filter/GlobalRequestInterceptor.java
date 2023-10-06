@@ -14,6 +14,8 @@ import reactor.core.publisher.Mono;
 import java.text.ParseException;
 
 import static com.achobeta.www.common.util.GlobalServiceStatusCode.*;
+import static com.achobeta.www.gateway.utils.GatewayConstants.AUTHORIZATION_HEADER;
+import static com.achobeta.www.gateway.utils.GatewayConstants.BEARER_PREFIX;
 
 /**
  * <span>
@@ -29,8 +31,7 @@ import static com.achobeta.www.common.util.GlobalServiceStatusCode.*;
  */
 @Component
 public class GlobalRequestInterceptor implements GlobalFilter {
-    private static final String AUTHORIZATION_HEADER = "Authorization";
-    private static final String BEARER_PREFIX = "Bearer ";
+
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
