@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-public class BaseAssignIDEntity {
+public class BaseAssignIDEntity implements Serializable {
     /**
      * id, incr
      */
