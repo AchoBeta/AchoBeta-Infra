@@ -1,6 +1,7 @@
 package com.achobeta.www.oauth.config;
 
 import com.achobeta.www.oauth.config.handler.AuthenticationFailureHandler;
+import com.achobeta.www.oauth.config.handler.logout.AuthenticationLogoutHandler;
 import com.achobeta.www.oauth.config.handler.logout.AuthenticationLogoutSuccessHandler;
 import com.achobeta.www.oauth.config.handler.AuthenticationSuccessHandler;
 import org.springframework.context.annotation.Bean;
@@ -41,7 +42,9 @@ public class AchoBetaWebSecurityConfig {
                         .anyExchange().denyAll()
                 ).formLogin(fl -> fl.authenticationSuccessHandler(new AuthenticationSuccessHandler())
                         .authenticationFailureHandler(new AuthenticationFailureHandler()))
-                .logout(logoutSpec -> logoutSpec.logoutSuccessHandler(new AuthenticationLogoutSuccessHandler()))
+                .logout(logoutSpec -> logoutSpec.logoutHandler(new AuthenticationLogoutHandler())
+                        .logoutSuccessHandler(new AuthenticationLogoutSuccessHandler())
+                )
 //                .httpBasic(basicSpec -> {
 //                    basicSpec.
 //                })
