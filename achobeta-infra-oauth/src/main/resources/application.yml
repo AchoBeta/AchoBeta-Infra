@@ -1,8 +1,19 @@
 spring:
+  security:
+    user:
+      name: "achobeta"
+      # 123123
+      password: "$2a$10$FzwjxqvdR0c9/ScWHnJVMeSQYU/4xazCKVrz/.3/zhps6GtYlI966"
   profiles:
     # debug in local, use application-local.yaml
     default: local
-  main:
+  datasource:
+    url: jdbc:mysql://rm-wz9i5gw9n7zm8mj4hro.mysql.rds.aliyuncs.com:3306/achobeta_infra?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username:
+    password:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#  main:
     # specify the type of gateway application
     # case 'reactive' : processing requests in non-blocking mode
     # case 'servlet' : is blocking mode

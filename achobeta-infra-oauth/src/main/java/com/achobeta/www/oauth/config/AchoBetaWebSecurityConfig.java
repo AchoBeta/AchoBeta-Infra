@@ -1,5 +1,8 @@
 package com.achobeta.www.oauth.config;
 
+import com.achobeta.www.oauth.config.handler.AuthenticationFailureHandler;
+import com.achobeta.www.oauth.config.handler.logout.AuthenticationLogoutSuccessHandler;
+import com.achobeta.www.oauth.config.handler.AuthenticationSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -9,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 import static org.springframework.security.authorization.AuthorityReactiveAuthorizationManager.hasRole;
-import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
  * <span>
@@ -37,10 +39,16 @@ public class AchoBetaWebSecurityConfig {
                                         .switchIfEmpty(hasRole("DBA").check(authentication, context))
                         )
                         .anyExchange().denyAll()
-                ).formLogin(withDefaults());
-        http.httpBasic();
-        // close CSRF
-        http.csrf().disable();
+                ).formLogin(fl -> fl.authenticationSuccessHandler(new AuthenticationSuccessHandler())
+                        .authenticationFailureHandler(new AuthenticationFailureHandler()))
+                .logout(logoutSpec -> logoutSpec.logoutSuccessHandler(new AuthenticationLogoutSuccessHandler()))
+//                .httpBasic(basicSpec -> {
+//                    basicSpec.
+//                })
+        ;
+
+
+        http.csrf(ServerHttpSecurity.CsrfSpec::disable);
         return http.build();
     }
 
