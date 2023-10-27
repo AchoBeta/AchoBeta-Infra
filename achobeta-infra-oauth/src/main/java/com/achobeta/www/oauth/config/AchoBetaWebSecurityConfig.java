@@ -26,7 +26,7 @@ import static org.springframework.security.authorization.AuthorityReactiveAuthor
 @EnableWebFluxSecurity
 public class AchoBetaWebSecurityConfig {
     @Bean
-    SecurityWebFilterChain defaultSecurityFilterChain(ServerHttpSecurity http) {
+    public SecurityWebFilterChain defaultSecurityFilterChain(ServerHttpSecurity http) {
         http
                 .authorizeExchange((authorize) -> authorize
                         .pathMatchers("/resources/**","/login", "/signup", "/about")
@@ -40,7 +40,8 @@ public class AchoBetaWebSecurityConfig {
                                         .switchIfEmpty(hasRole("DBA").check(authentication, context))
                         )
                         .anyExchange().denyAll()
-                ).formLogin(fl -> fl.authenticationSuccessHandler(new AuthenticationSuccessHandler())
+                ).formLogin(fl ->
+                        fl.authenticationSuccessHandler(new AuthenticationSuccessHandler())
                         .authenticationFailureHandler(new AuthenticationFailureHandler()))
                 .logout(logoutSpec -> logoutSpec.logoutHandler(new AuthenticationLogoutHandler())
                         .logoutSuccessHandler(new AuthenticationLogoutSuccessHandler())

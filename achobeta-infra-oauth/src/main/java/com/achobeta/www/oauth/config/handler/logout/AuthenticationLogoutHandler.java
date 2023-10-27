@@ -1,7 +1,5 @@
 package com.achobeta.www.oauth.config.handler.logout;
 
-import com.achobeta.www.common.util.GlobalServiceStatusCode;
-import com.achobeta.www.oauth.exception.LogoutRequestException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
@@ -10,16 +8,11 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.server.WebFilterExchange;
 import org.springframework.security.web.server.authentication.logout.ServerLogoutHandler;
-import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
-import reactor.util.context.Context;
-
-import java.util.Optional;
-import java.util.function.Function;
 
 /**
  * <span>
- * authentication logout handler, logoutHandler - > logout success
+ * authentication logout handler, logoutHandler -> logout success
  * </span>
  *
  * @author jettcc in 2023/10/23

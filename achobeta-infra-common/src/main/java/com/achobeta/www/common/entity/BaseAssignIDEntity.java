@@ -23,8 +23,7 @@ public class BaseAssignIDEntity implements Serializable {
     /**
      * id, incr
      */
-    @TableField("c_id")
-    @TableId(type = IdType.ASSIGN_ID)
+    @TableId(type = IdType.AUTO, value = "c_id")
     private Long id;
 
     /**

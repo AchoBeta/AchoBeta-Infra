@@ -22,8 +22,7 @@ public class BaseIncrIDEntity implements Serializable {
     /**
      * id, incr
      */
-    @TableField("c_id")
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.AUTO, value = "c_id")
     private Long id;
 
     /**

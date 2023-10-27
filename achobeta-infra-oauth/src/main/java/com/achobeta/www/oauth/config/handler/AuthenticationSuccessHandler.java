@@ -1,6 +1,7 @@
 package com.achobeta.www.oauth.config.handler;
 
 import com.achobeta.www.common.util.GlobalServiceStatusCode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.server.WebFilterExchange;
@@ -17,7 +18,9 @@ import static com.achobeta.www.oauth.utils.ResponseUtil.createAccessDeniedRespon
  * @author jettcc in 2023/10/23
  * @version 1.0
  */
+@Slf4j
 public class AuthenticationSuccessHandler implements ServerAuthenticationSuccessHandler {
+
     @Override
     public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange,
                                               Authentication authentication) {
