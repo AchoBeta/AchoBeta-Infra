@@ -4,6 +4,7 @@ import com.achobeta.www.oauth.config.handler.AuthenticationFailureHandler;
 import com.achobeta.www.oauth.config.handler.logout.AuthenticationLogoutHandler;
 import com.achobeta.www.oauth.config.handler.logout.AuthenticationLogoutSuccessHandler;
 import com.achobeta.www.oauth.config.handler.AuthenticationSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -25,11 +26,15 @@ import static org.springframework.security.authorization.AuthorityReactiveAuthor
 @Configuration
 @EnableWebFluxSecurity
 public class AchoBetaWebSecurityConfig {
+    @Autowired
+    private AuthenticationWhitelistConfig whitelistConfig;
     @Bean
     public SecurityWebFilterChain defaultSecurityFilterChain(ServerHttpSecurity http) {
+        String[] urls = whitelistConfig.getUrls().toArray(new String[0]);
         http
                 .authorizeExchange((authorize) -> authorize
-                        .pathMatchers("/resources/**","/login", "/signup", "/about")
+                        // 白名单路径
+                        .pathMatchers(urls)
                         .permitAll()
                         .pathMatchers("/admin/**")
                         .hasRole("ADMIN")
