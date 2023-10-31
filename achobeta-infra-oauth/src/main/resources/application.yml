@@ -13,21 +13,41 @@ spring:
     password:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-#  main:
+  main:
     # specify the type of gateway application
     # case 'reactive' : processing requests in non-blocking mode
     # case 'servlet' : is blocking mode
     web-application-type: reactive
   application:
     name: achobeta-infra-oauth
-
-
-
-
-
-
-
-
+  data:
+    # redis
+    redis:
+      database: 5
+      host: localhost
+      port: 6379
+      timeout: 3000ms
+      lettuce:
+        pool:
+          # Maximum number of connections, a negative value indicates no limit, default is 8
+          max-active: 20
+          # Maximum blocking wait time, a negative value indicates no limit, default is -1
+          max-wait: -1
+          # Maximum idle connections, default is 8
+          max-idle: 8
+          # Minimum idle connections, default is 0
+          min-idle: 0
+achobeta:
+  auth:
+    whitelist:
+      urls:
+        - "/login"
+        - "/v0/**"
+        - "/auth/oauth/token"
+        - "/swagger**/**"
+        - "/webjars/**"
+        - "/doc.html"
+        - "/*/*/api-docs"
 # ---------------------------- Try not to modify the following configurations ----------------------------
 
 # Default port number, not to change it,
