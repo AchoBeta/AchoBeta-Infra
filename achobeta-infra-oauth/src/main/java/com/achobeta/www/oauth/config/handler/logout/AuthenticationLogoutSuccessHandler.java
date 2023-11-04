@@ -6,6 +6,7 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.server.WebFilterExchange;
 import org.springframework.security.web.server.authentication.logout.ServerLogoutSuccessHandler;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import static com.achobeta.www.oauth.utils.ResponseUtil.createAccessDeniedResponse;
@@ -18,6 +19,7 @@ import static com.achobeta.www.oauth.utils.ResponseUtil.createAccessDeniedRespon
  * @version 1.0
  */
 @Slf4j
+@Component
 public class AuthenticationLogoutSuccessHandler implements ServerLogoutSuccessHandler {
     @Override
     public Mono<Void> onLogoutSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
