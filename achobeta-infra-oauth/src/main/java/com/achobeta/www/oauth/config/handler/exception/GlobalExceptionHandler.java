@@ -1,4 +1,4 @@
-package com.achobeta.www.oauth.exception;
+package com.achobeta.www.oauth.config.handler.exception;
 
 import com.achobeta.www.common.util.GlobalServiceStatusCode;
 import com.achobeta.www.common.util.SystemJsonResponse;

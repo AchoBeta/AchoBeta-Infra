@@ -47,7 +47,7 @@ public enum GlobalServiceStatusCode {
     GATEWAY_TOKEN_PARSER_ERROR(3002, "网关层token解析失败"),
 
     /* 权限中心错误 4001-5000*/
-    AUTH_LOGIN_PARAMS_CONVERTER_ERROR(4001, "登陆参数错误, 请使用json格式请求")
+    AUTH_LOGIN_PARAMS_CONVERTER_ERROR(4001, "登陆参数错误")
 
     /* -------------- */;
 

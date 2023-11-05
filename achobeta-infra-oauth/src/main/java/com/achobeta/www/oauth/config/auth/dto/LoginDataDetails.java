@@ -1,6 +1,7 @@
 package com.achobeta.www.oauth.config.auth.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -15,7 +16,10 @@ import lombok.ToString;
 @Getter
 @ToString
 @Setter
+@NoArgsConstructor
 public class LoginDataDetails {
+    private Long id;
     private String username;
     private String password;
+    private String phone;
 }

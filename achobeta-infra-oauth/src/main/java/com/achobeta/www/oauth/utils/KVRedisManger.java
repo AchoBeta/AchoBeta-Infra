@@ -1,7 +1,8 @@
 package com.achobeta.www.oauth.utils;
 
 
-import jakarta.annotation.Resource;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -29,7 +30,7 @@ public class KVRedisManger {
         this.kv = kv;
     }
 
-    // =============================common============================
+    // ============================= Common ============================
 
     /**
      * specify cache expiration time
@@ -83,9 +84,26 @@ public class KVRedisManger {
     }
 
 
-    /*
-      String related methods
+    /**
+     * get normal kv
+     *
+     * @param key 键
+     * @return 值
      */
+    public Object get(String key) {
+        if (StringUtils.isEmpty(key)) return null;
+        return kv.opsForValue().get(key);
+    }
 
+    // ================================ Map =================================
+    /**
+     * HashGet
+     *
+     * @param key  键 不能为null
+     * @param item 项 不能为null
+     */
+    public Object hget(@NonNull String key, @NonNull String item) {
+        return kv.opsForHash().get(key, item);
+    }
 
 }
