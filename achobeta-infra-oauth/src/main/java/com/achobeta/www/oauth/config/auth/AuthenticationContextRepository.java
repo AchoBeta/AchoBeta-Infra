@@ -8,6 +8,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.web.server.context.ServerSecurityContextRepository;
@@ -51,7 +52,10 @@ public class AuthenticationContextRepository
     @Override
     public Mono<Void> save(ServerWebExchange exchange, SecurityContext context) {
         // redis 里有说明不需要验证了
-        context.getAuthentication().setAuthenticated(true);
+        Authentication authentication = context.getAuthentication();
+        AuthenticationToken token = new AuthenticationToken(authentication.getPrincipal(),
+                authentication.getCredentials(), authentication.getAuthorities());
+        context.setAuthentication(token);
         return super.save(exchange, context);
     }
 
