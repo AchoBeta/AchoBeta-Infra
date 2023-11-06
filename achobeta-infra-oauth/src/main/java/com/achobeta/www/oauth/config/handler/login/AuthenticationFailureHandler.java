@@ -22,7 +22,7 @@ import static com.achobeta.www.oauth.utils.ResponseUtil.createAccessDeniedRespon
 
 /**
  * <span>
- *     handler authentication failure
+ * handler authentication failure
  * </span>
  *
  * @author jettcc in 2023/10/23
@@ -32,16 +32,18 @@ import static com.achobeta.www.oauth.utils.ResponseUtil.createAccessDeniedRespon
 public class AuthenticationFailureHandler implements ServerAuthenticationFailureHandler {
     @Override
     public Mono<Void> onAuthenticationFailure(WebFilterExchange webFilterExchange, AuthenticationException exception) {
-        return Mono.defer(() -> Mono.just(webFilterExchange.getExchange().getResponse()).flatMap(response -> {
-            DataBufferFactory dataBufferFactory = response.bufferFactory();
-            SystemJsonResponse result = SystemJsonResponse.SYSTEM_FAIL();
-            // 账号不存在
-            if (exception instanceof LoginMsgConverterException) {
-                result = SystemJsonResponse.CUSTOMIZE_ERROR(GlobalServiceStatusCode.AUTH_LOGIN_PARAMS_CONVERTER_ERROR);
-            }
-            DataBuffer dataBuffer = dataBufferFactory.wrap(JSONObject.toJSONString(result).getBytes());
-            response.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-            return response.writeWith(Mono.just(dataBuffer));
-        }));
+        return Mono.defer(() ->
+                Mono.just(webFilterExchange.getExchange().getResponse()).flatMap(response -> {
+                    var result = switch (exception) {
+                        case UsernameNotFoundException ignored -> GlobalServiceStatusCode.USER_ACCOUNT_NOT_EXIST;
+                        case LoginMsgConverterException ignored ->
+                                GlobalServiceStatusCode.AUTH_LOGIN_PARAMS_CONVERTER_ERROR;
+                        case BadCredentialsException ignored ->
+                            GlobalServiceStatusCode.USER_CREDENTIALS_ERROR;
+                        // 未知错误抛出异常
+                        default -> GlobalServiceStatusCode.SYSTEM_SERVICE_FAIL;
+                    };
+                    return createAccessDeniedResponse(response, result);
+                }));
     }
 }
