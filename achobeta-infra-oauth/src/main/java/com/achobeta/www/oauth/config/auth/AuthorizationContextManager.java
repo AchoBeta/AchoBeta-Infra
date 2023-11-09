@@ -4,6 +4,7 @@ import com.achobeta.www.common.util.GlobalServiceStatusCode;
 import com.achobeta.www.common.util.SystemJsonResponse;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.ReactiveAuthorizationManager;
 import org.springframework.security.core.Authentication;
@@ -13,12 +14,10 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.nio.file.AccessDeniedException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <span>
- *     authorized logic processing center
+ * authorized logic processing center
  * </span>
  *
  * @author jettcc in 2023/11/6
@@ -27,18 +26,27 @@ import java.util.List;
 @Component
 @Slf4j
 public class AuthorizationContextManager implements ReactiveAuthorizationManager<AuthorizationContext> {
+    private final AuthCommonFunction authCommonFunction;
+
+    public AuthorizationContextManager(AuthCommonFunction authCommonFunction) {
+        this.authCommonFunction = authCommonFunction;
+    }
+
     @Override
-    public Mono<AuthorizationDecision> check(Mono<Authentication> authentication, AuthorizationContext authorizationContext) {
+    public Mono<AuthorizationDecision> check(Mono<Authentication> authentication, AuthorizationContext context) {
         /*
             配置可访问路径列表, 现在没有需求, 全放开, 这里只是留个模板以后好改
             List<String> needAuthorityList = new ArrayList<>(){{add("/**");}};
             AuthorizationDecision authorizationDecision = new AuthorizationDecision(true);
          */
-        return authentication
+        HttpHeaders headers = context.getExchange().getRequest().getHeaders();
+        Authentication auth = authCommonFunction.getAuthenticationBySessionIdToAuthenticationToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
+
+        return  Mono.justOrEmpty(auth)
                 .filter(Authentication::isAuthenticated)
                 .flatMapIterable(Authentication::getAuthorities)
                 .map(GrantedAuthority::getAuthority)
-                .any(_ -> true)
+                .any(s -> true)
                 .map(AuthorizationDecision::new)
                 .defaultIfEmpty(new AuthorizationDecision(false));
     }

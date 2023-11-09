@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AbstractUserDetailsReactiveAuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -55,13 +55,18 @@ public class AuthenticationUsernameManager extends AbstractUserDetailsReactiveAu
         if (Objects.isNull(loginData)) {
             throw new AuthenticationServiceException("未获取到登陆参数");
         }
-
         return retrieveUser(loginData.getUsername())
                 .publishOn(scheduler)
                 .filter(user -> passwordEncoder.matches(loginData.getPassword(), user.getPassword()))
                 .switchIfEmpty(Mono.defer(() -> Mono.error(new BadCredentialsException("账号或密码错误！"))))
-                .map(u-> new UsernamePasswordAuthenticationToken(u, u.getPassword()))
+                .map(u -> {
+                    AuthenticationToken authToken =
+                            new AuthenticationToken(u.getAuthorities(), u, u.getPassword(), loginData);
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                    return authToken;
+                })
         ;
+
     }
 
     @Override

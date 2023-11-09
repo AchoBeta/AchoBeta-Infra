@@ -1,11 +1,11 @@
 package com.achobeta.www.oauth.config;
 
 import com.achobeta.www.oauth.config.auth.*;
+import com.achobeta.www.oauth.config.auth.manager.AuthenticationUsernameManager;
 import com.achobeta.www.oauth.config.handler.login.AuthenticationFailureHandler;
 import com.achobeta.www.oauth.config.handler.login.AuthenticationSuccessHandler;
 import com.achobeta.www.oauth.config.handler.logout.AuthenticationLogoutHandler;
 import com.achobeta.www.oauth.config.handler.logout.AuthenticationLogoutSuccessHandler;
-import com.achobeta.www.oauth.config.auth.manager.AuthenticationUsernameManager;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Order;
 import org.springframework.context.annotation.Bean;
@@ -55,38 +55,27 @@ public class AchoBetaWebSecurityConfig {
      */
     private static final String USER_SECURITY_FILTER_LOGIN_URL = "/api/v1/auth/login";
 
-    @Bean
-    @Order(1)
+    @Bean("securityFilterChain")
+    @Order(0)
     public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) {
         String[] urls = whitelistConfig.getUrls().toArray(new String[0]);
         http
-                .authorizeExchange((authorize) -> authorize
-                        // 白名单路径
-                        .pathMatchers(urls)
-                        .permitAll()
-                        .pathMatchers("/admin/**")
-                        .hasRole("ADMIN")
-                        .pathMatchers("/db/**")
-                        .access((authentication, context) ->
-                                hasRole("ADMIN").check(authentication, context)
-                                        .filter(decision -> !decision.isGranted())
-                                        .switchIfEmpty(hasRole("DBA").check(authentication, context))
-                        )
-                        .pathMatchers(HttpMethod.OPTIONS).permitAll()
-                        .anyExchange().access(authorizationContextManager)
-                )
-                .exceptionHandling(spec -> spec
-                        .accessDeniedHandler(authenticationAccessDeniedHandler)
-                        .authenticationEntryPoint(authenticationEntryPoint))
+                .csrf(ServerHttpSecurity.CsrfSpec::disable)
+                .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
+                .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
                 .securityMatcher(ServerWebExchangeMatchers.anyExchange())
                 .securityContextRepository(authenticationContextRepository)
-                .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
-                .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
+                .authorizeExchange((authorize) -> authorize
+                        .pathMatchers(urls).permitAll()
+                        .anyExchange().access(authorizationContextManager)
+                )
                 .logout(spec -> spec
                         .logoutHandler(authenticationLogoutHandler)
                         .logoutSuccessHandler(authenticationLogoutSuccessHandler))
+                .exceptionHandling(spec -> spec
+                        .accessDeniedHandler(authenticationAccessDeniedHandler)
+                        .authenticationEntryPoint(authenticationEntryPoint))
                 .addFilterAt(authenticationWebFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
-                .csrf(ServerHttpSecurity.CsrfSpec::disable)
         ;
         return http.build();
     }

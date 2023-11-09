@@ -33,16 +33,12 @@ import java.util.Objects;
 public class AuthenticationContextRepository
         extends WebSessionServerSecurityContextRepository
         implements ServerSecurityContextRepository {
+    private final AuthCommonFunction authCommonFunction;
     private final AuthenticationUsernameManager authenticationUsernameManager;
-    private final KVRedisManger kvRedisManger;
 
-    private final String AUTH_SESSION_REDIS_PREFIX = "achobeta:infra:sessions";
-    private final String AUTH_SESSION_ITEM_REDIS_KEY = "sessionAttr:SPRING_SECURITY_CONTEXT";
-
-    public AuthenticationContextRepository(AuthenticationUsernameManager authenticationUsernameManager,
-                                           KVRedisManger kvRedisManger) {
+    public AuthenticationContextRepository(AuthCommonFunction authCommonFunction, AuthenticationUsernameManager authenticationUsernameManager) {
+        this.authCommonFunction = authCommonFunction;
         this.authenticationUsernameManager = authenticationUsernameManager;
-        this.kvRedisManger = kvRedisManger;
     }
 
     /**
@@ -65,15 +61,10 @@ public class AuthenticationContextRepository
         // 从header里拿到SESSION ID
         HttpHeaders headers = exchange.getRequest().getHeaders();
         String sessionId = headers.getFirst(HttpHeaders.AUTHORIZATION);
-        if (StringUtils.isBlank(sessionId)) {
+        JSONObject authentication = authCommonFunction.getSessionRedisAuthenticationEntityBySessionId(sessionId);
+        if (Objects.isNull(authentication)) {
             return Mono.empty();
         }
-        JSONObject auth = JSONObject.from(kvRedisManger.hget(STR. "\{ AUTH_SESSION_REDIS_PREFIX }:\{ sessionId }" , AUTH_SESSION_ITEM_REDIS_KEY));
-        if (Objects.isNull(auth)) {
-            return Mono.empty();
-        }
-        JSONObject authentication = JSONObject.from(auth.get("authentication"));
-        AuthenticationToken token = authentication.to(AuthenticationToken.class);
         JSONObject principal = JSONObject.from(authentication.get("principal"));
         LoginDataDetails details = new LoginDataDetails();
 
@@ -83,6 +74,7 @@ public class AuthenticationContextRepository
         details.setUsername(authentication.getString("name"));
         details.setPassword(authentication.getString("credentials"));
 
+        AuthenticationToken token = JSONObject.parseObject(authentication.toString(), AuthenticationToken.class);
         token.setLoginData(details);
         return authenticationUsernameManager
                 .authenticate(token)
