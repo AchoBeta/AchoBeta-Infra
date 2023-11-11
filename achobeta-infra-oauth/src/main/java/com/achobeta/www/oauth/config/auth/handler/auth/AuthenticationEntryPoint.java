@@ -1,4 +1,4 @@
-package com.achobeta.www.oauth.config.auth;
+package com.achobeta.www.oauth.config.auth.handler.auth;
 
 import com.achobeta.www.common.util.GlobalServiceStatusCode;
 import com.achobeta.www.oauth.utils.ResponseUtil;

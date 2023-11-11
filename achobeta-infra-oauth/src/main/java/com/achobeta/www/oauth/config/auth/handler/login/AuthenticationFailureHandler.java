@@ -1,4 +1,4 @@
-package com.achobeta.www.oauth.config.handler.login;
+package com.achobeta.www.oauth.config.auth.handler.login;
 
 import com.achobeta.www.common.util.GlobalServiceStatusCode;
 import com.achobeta.www.common.util.SystemJsonResponse;

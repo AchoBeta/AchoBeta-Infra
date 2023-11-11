@@ -1,4 +1,4 @@
-package com.achobeta.www.oauth.config.handler.logout;
+package com.achobeta.www.oauth.config.auth.handler.logout;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;

@@ -1,11 +1,13 @@
 package com.achobeta.www.oauth.config;
 
 import com.achobeta.www.oauth.config.auth.*;
+import com.achobeta.www.oauth.config.auth.handler.auth.AuthenticationAccessDeniedHandler;
+import com.achobeta.www.oauth.config.auth.handler.auth.AuthenticationEntryPoint;
 import com.achobeta.www.oauth.config.auth.manager.AuthenticationUsernameManager;
-import com.achobeta.www.oauth.config.handler.login.AuthenticationFailureHandler;
-import com.achobeta.www.oauth.config.handler.login.AuthenticationSuccessHandler;
-import com.achobeta.www.oauth.config.handler.logout.AuthenticationLogoutHandler;
-import com.achobeta.www.oauth.config.handler.logout.AuthenticationLogoutSuccessHandler;
+import com.achobeta.www.oauth.config.auth.handler.login.AuthenticationFailureHandler;
+import com.achobeta.www.oauth.config.auth.handler.login.AuthenticationSuccessHandler;
+import com.achobeta.www.oauth.config.auth.handler.logout.AuthenticationLogoutHandler;
+import com.achobeta.www.oauth.config.auth.handler.logout.AuthenticationLogoutSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Order;
 import org.springframework.context.annotation.Bean;
@@ -22,8 +24,6 @@ import org.springframework.security.web.server.util.matcher.ServerWebExchangeMat
 
 import java.util.LinkedList;
 import java.util.List;
-
-import static org.springframework.security.authorization.AuthorityReactiveAuthorizationManager.hasRole;
 
 /**
  * <span>
