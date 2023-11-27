@@ -8,9 +8,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
+
 /**
  * <span>
- *     user details
+ * user details
  * </span>
  *
  * @author jettcc in 2023/10/17
@@ -30,9 +31,10 @@ public class AchobetaUserDetails implements UserDetails {
     private final boolean credentialsNonExpired;
     private final boolean enabled;
 
-    public AchobetaUserDetails(Long id, String uuid,
-            String username, String password,
-
+    public AchobetaUserDetails(Long id,
+                               String uuid,
+                               String username,
+                               String password,
                                String phone,
                                List<GrantedAuthority> authorities,
                                boolean accountNonExpired,
@@ -64,6 +66,7 @@ public class AchobetaUserDetails implements UserDetails {
     private static class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {
         @Serial
         private static final long serialVersionUID = 600L;
+
         public int compare(GrantedAuthority g1, GrantedAuthority g2) {
             if (g2.getAuthority() == null) {
                 return -1;

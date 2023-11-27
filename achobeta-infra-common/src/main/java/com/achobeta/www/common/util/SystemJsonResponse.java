@@ -89,4 +89,16 @@ public class SystemJsonResponse extends LinkedHashMap<String, Object> {
     public static SystemJsonResponse CUSTOMIZE_ERROR(GlobalServiceStatusCode code) {
         return new SystemJsonResponse(code.getCode(), code.getMessage());
     }
+
+    /**
+     * 系统异常返回, 自定义code
+     * {@link GlobalServiceStatusCode#SYSTEM_SERVICE_ERROR}
+     *
+     * @param code 自定义状态码 {@link com.achobeta.www.common.util.GlobalServiceStatusCode}
+     * @param msg 自定义异常信息
+     * @return code对应的错误信息
+     */
+    public static SystemJsonResponse CUSTOMIZE_MSG_ERROR(GlobalServiceStatusCode code, String msg) {
+        return new SystemJsonResponse(code.getCode(), Optional.ofNullable(msg).orElse(code.getMessage()));
+    }
 }

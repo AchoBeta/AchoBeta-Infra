@@ -40,7 +40,7 @@ public class AchobetaUserDetailsServiceImpl implements ReactiveUserDetailsServic
         var user = Optional.ofNullable(authUserMapper.selectOne(new QueryWrapper<AuthUser>()
                         .eq("c_username", username)))
                 .orElseThrow(() -> new UsernameNotFoundException(STR. "account \{ username } not found" ));
-        var authList = AuthorityUtils.commaSeparatedStringToAuthorityList("role");
+        var authList = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN");
 
         return Mono.just(new AchobetaUserDetails(
                 user.getId(),

@@ -44,7 +44,13 @@ public enum GlobalServiceStatusCode {
 
     /* 网关层错误 3001-4000 */
     GATEWAY_JWS_PARSER_ERROR(3001, "网关层格式错误，无法解析"),
-    GATEWAY_TOKEN_PARSER_ERROR(3002, "网关层token解析失败")
+    GATEWAY_TOKEN_PARSER_ERROR(3002, "网关层token解析失败"),
+
+    /* 权限中心错误 4001-5000*/
+    AUTH_LOGIN_PARAMS_CONVERTER_ERROR(4001, "登陆参数错误"),
+    AUTH_AUTHENTICATION_ERROR(4002, "鉴权错误"),
+
+
     /* -------------- */;
 
     private final Integer code;

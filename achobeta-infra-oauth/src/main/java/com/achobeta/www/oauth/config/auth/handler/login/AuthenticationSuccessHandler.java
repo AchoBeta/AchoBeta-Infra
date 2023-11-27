@@ -1,11 +1,13 @@
-package com.achobeta.www.oauth.config.handler;
+package com.achobeta.www.oauth.config.auth.handler.login;
 
 import com.achobeta.www.common.util.GlobalServiceStatusCode;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.server.WebFilterExchange;
 import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import static com.achobeta.www.oauth.utils.ResponseUtil.createAccessDeniedResponse;
@@ -19,6 +21,7 @@ import static com.achobeta.www.oauth.utils.ResponseUtil.createAccessDeniedRespon
  * @version 1.0
  */
 @Slf4j
+@Component
 public class AuthenticationSuccessHandler implements ServerAuthenticationSuccessHandler {
 
     @Override
