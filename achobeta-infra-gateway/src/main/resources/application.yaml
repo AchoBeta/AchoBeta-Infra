@@ -1,55 +1,14 @@
+nacos:
+  config:
+    bootstrap:
+      enable: true
+    server-addr: "http://1.12.44.120:8848"
+    namespace: "c60f423d-e415-4982-b9b9-09a1554e2f58"
+    data-id: "achobeta-infra-data"
+    group: "infra-gateway"
+    type: properties
+    username: "achobeta-read"
+    password: "achobeta"
 spring:
-  profiles:
-    # debug in local, use application-local.yaml
-    default: local
-  main:
-    # specify the type of gateway application
-    # case 'reactive' : processing requests in non-blocking mode
-    # case 'servlet' : is blocking mode
-    web-application-type: reactive
   application:
-    name: achobeta-infra-gateway
-
-# Whitelist
-gateway:
-  whitelist:
-    urls:
-      - "/v0/**"
-      - "/auth/oauth/token"
-      - "/swagger**/**"
-      - "/webjars/**"
-      - "/doc.html"
-      - "/*/*/api-docs"
-
-
-# ---------------------------- Try not to modify the following configurations ----------------------------
-
-# Default port number, not to change it,
-# if you need to change it for debugging,
-# you can add the startup parameter, e.g.:"-Dserver.port=(number)"
-# or create local config file to "application-local.yaml"
-server:
-  port: 4396
-  tomcat:
-    basedir: ./
-    accesslog:
-      buffered: false
-      directory: logs
-      enabled: true
-      file-date-format: .yyyy-MM-dd
-      pattern: '%h %l %u %t "%r" %s"%{Referer}i" "%{User-Agent}i" %D %{x-request-id}r %{user-id}r %{resource-id}r'
-      prefix: access_log
-      rename-on-rotate: true
-      request-attributes-enabled: false
-      rotate: true
-      suffix: .log
-
-# logger 配置
-logging:
-  level:
-    root: info
-    com:
-      achobeta:
-        www:
-          gateway: debug
-
+    name: achobeta-infra-oauth

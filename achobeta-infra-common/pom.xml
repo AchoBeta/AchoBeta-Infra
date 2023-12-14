@@ -11,6 +11,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>achobeta-infra-common</name>
     <description>achobeta-infra-common</description>
+    <packaging>jar</packaging>
     <properties>
         <java.version>21</java.version>
     </properties>
@@ -28,13 +29,5 @@
             </exclusions>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

@@ -1,81 +1,14 @@
+nacos:
+  config:
+    bootstrap:
+      enable: true
+    server-addr: "http://1.12.44.120:8848"
+    namespace: "c60f423d-e415-4982-b9b9-09a1554e2f58"
+    data-id: "achobeta-infra-data"
+    group: "infra-a"
+    type: properties
+    username: "achobeta-read"
+    password: "achobeta"
 spring:
-  security:
-    user:
-      name: "achobeta"
-      # 123123
-      password: "$2a$10$FzwjxqvdR0c9/ScWHnJVMeSQYU/4xazCKVrz/.3/zhps6GtYlI966"
-  profiles:
-    # debug in local, use application-local.yaml
-    default: local
-  datasource:
-    url: jdbc:mysql://rm-wz9i5gw9n7zm8mj4hro.mysql.rds.aliyuncs.com:3306/achobeta_infra?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
-    username:
-    password:
-    type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  main:
-    # specify the type of gateway application
-    # case 'reactive' : processing requests in non-blocking mode
-    # case 'servlet' : is blocking mode
-    web-application-type: reactive
   application:
     name: achobeta-infra-oauth
-  data:
-    # redis
-    redis:
-      database: 5
-      host: localhost
-      port: 6379
-      timeout: 3000ms
-      lettuce:
-        pool:
-          # Maximum number of connections, a negative value indicates no limit, default is 8
-          max-active: 20
-          # Maximum blocking wait time, a negative value indicates no limit, default is -1
-          max-wait: -1
-          # Maximum idle connections, default is 8
-          max-idle: 8
-          # Minimum idle connections, default is 0
-          min-idle: 0
-achobeta:
-  auth:
-    whitelist:
-      urls:
-        - "/login"
-        - "/v0/**"
-        - "/auth/oauth/token"
-        - "/swagger**/**"
-        - "/webjars/**"
-        - "/doc.html"
-        - "/*/*/api-docs"
-# ---------------------------- Try not to modify the following configurations ----------------------------
-
-# Default port number, not to change it,
-# if you need to change it for debugging,
-# you can add the startup parameter, e.g.:"-Dserver.port=(number)"
-# or create local config file to "application-local.yaml"
-server:
-  port: 8989
-  tomcat:
-    basedir: ./
-    accesslog:
-      buffered: false
-      directory: logs
-      enabled: true
-      file-date-format: .yyyy-MM-dd
-      pattern: '%h %l %u %t "%r" %s"%{Referer}i" "%{User-Agent}i" %D %{x-request-id}r %{user-id}r %{resource-id}r'
-      prefix: access_log
-      rename-on-rotate: true
-      request-attributes-enabled: false
-      rotate: true
-      suffix: .log
-
-# logger 配置
-logging:
-  level:
-    root: info
-    com:
-      achobeta:
-        www:
-          oauth: debug
-
