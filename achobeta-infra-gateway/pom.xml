@@ -80,6 +80,11 @@
             <artifactId>logstash-logback-encoder</artifactId>
             <version>7.1.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>nacos-config-spring-boot-starter</artifactId>
+            <version>0.2.12</version>
+        </dependency>
     </dependencies>
 
     <build>
