@@ -1,0 +1,11 @@
+version: '3'
+services:
+  infra-service:
+    build:
+        context: .
+        dockerfile: ./achobeta-infra-oauth/Dockerfile
+    image: achobeta/achobeta-infra-oauth:latest
+    ports:
+      - "4396:4396"
+    volumes:
+    - ./logs:/logs # 创建容器数据卷
