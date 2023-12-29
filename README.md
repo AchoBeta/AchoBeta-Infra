@@ -60,17 +60,24 @@ or: feat(common): add new api
 
 ## type
 
-feat: feature
+```text
+# Main type
+feat:      add new features
+fix:       fix bug
 
-fix: fix bug
+#Special type
+docs:      only document-related content has been changed
+style:     changes that do not affect the meaning of the code, such as removing spaces, changing indentation, adding or deleting semicolons
+build:     changes to construction tools or external dependencies, such as webpack, npm
+refactor:  used when refactoring code
+revert:    the message printed by executing git revert
 
-docs: documentation
-
-test: add test function
-
-style: format (changes that do not affect code operation).
-
-refactor: Refactoring (that is, code changes that are not new features or bug fixes).
+# Do not use type yet
+test:      add a test or modify an existing test
+perf:      changes to improve performance
+ci:        changes related to CI (Continuous Integration Service)
+chore:     other modifications that do not modify src or test, such as changes to the build process or auxiliary tools
+```
 
 ## subject
 
