@@ -1,0 +1,14 @@
+nacos:
+  config:
+    bootstrap:
+      enable: true
+    server-addr: "http://1.12.44.120:8848"
+    namespace: "c60f423d-e415-4982-b9b9-09a1554e2f58"
+    data-id: "achobeta-infra-data"
+    group: "infra-service"
+    type: properties
+    username: "achobeta-read"
+    password: "achobeta"
+spring:
+  application:
+    name: achobeta-infra-service
