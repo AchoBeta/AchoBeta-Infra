@@ -25,6 +25,6 @@ hs_err_pid*
 replay_pid*
 
 # local config file
-**/src/**/resources/*-local.yaml
+**/src/**/resources/*.yaml
 */.mvn
 */mvn*
