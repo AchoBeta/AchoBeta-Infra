@@ -18,3 +18,12 @@ services:
       - "4399:4399"
     volumes:
       - ./logs:/logs # 创建容器数据卷
+  infra-api-service:
+    build:
+      context: .
+      dockerfile: ./achobeta-infra-service/Dockerfile
+    image: achobeta/achobeta-infra-service:latest
+    ports:
+      - "4397:4397"
+    volumes:
+      - ./logs:/logs # 创建容器数据卷

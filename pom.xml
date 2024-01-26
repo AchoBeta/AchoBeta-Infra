@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.4</version>
+        <version>3.2.0</version>
         <relativePath/>
     </parent>
     <groupId>com.achobeta.www</groupId>
@@ -16,6 +16,7 @@
         <module>achobeta-infra-common</module>
         <module>achobeta-infra-gateway</module>
         <module>achobeta-infra-oauth</module>
+        <module>achobeta-infra-service</module>
     </modules>
     <packaging>pom</packaging>
     <description>achobeta-infra</description>
