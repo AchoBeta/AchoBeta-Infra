@@ -55,6 +55,12 @@
             <artifactId>fastjson2-extension-spring6</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
+        <!-- logstash -->
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>7.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>
