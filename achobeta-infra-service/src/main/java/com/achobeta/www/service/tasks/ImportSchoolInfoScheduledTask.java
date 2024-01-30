@@ -45,8 +45,8 @@ public class ImportSchoolInfoScheduledTask {
     );
 
 
-    //@Scheduled(cron = "0 30 2 1 * ?")
-    @Scheduled(cron = "*/5 * * * * ?")
+    @Scheduled(cron = "0 30 2 1 * ?")
+//    @Scheduled(cron = "*/5 * * * * ?") // debug
     public void importSchoolClassData() {
         log.info("start import school class data.");
         if (U_LEARN_TOKEN_URL.isBlank()) throw new RuntimeException("U_LEARN_TOKEN_STRING is blank, plz check it.");
