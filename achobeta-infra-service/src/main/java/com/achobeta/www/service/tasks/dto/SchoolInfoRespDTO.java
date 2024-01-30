@@ -21,5 +21,5 @@ public class SchoolInfoRespDTO {
     private Long total;
 
     // class list
-    private List<ClassInfo> list;
+    private List<ClassInfo> infos;
 }

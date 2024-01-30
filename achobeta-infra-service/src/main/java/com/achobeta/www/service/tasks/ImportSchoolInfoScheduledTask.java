@@ -60,7 +60,7 @@ public class ImportSchoolInfoScheduledTask {
                     }
                 }).orElseThrow(() -> new RuntimeException("get school class info is blank, plz check it."));
                 var classInfo = JSONObject.parseObject(schoolClassInfo, SchoolInfoRespDTO.class);
-                ClassInfoService.INSTANCE.saveOrUpdateBatch(classInfo.getList());
+                ClassInfoService.INSTANCE.saveOrUpdateBatch(classInfo.getInfos());
             } catch (Exception e) {
                 throw new RuntimeException(e.getMessage());
             }
