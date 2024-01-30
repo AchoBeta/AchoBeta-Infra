@@ -20,4 +20,10 @@ public class SchoolInfoController {
         var resp = server.queryClassInfoByParams(params);
         return Mono.just(SystemJsonResponse.SYSTEM_SUCCESS(resp));
     }
+
+    @GetMapping("/college/query/name")
+    public Mono<SystemJsonResponse> queryAllCollegeName(@RequestParam("grade") Integer grade) {
+        var resp = server.queryAllCollegeName(grade);
+        return Mono.just(SystemJsonResponse.SYSTEM_SUCCESS(resp));
+    }
 }

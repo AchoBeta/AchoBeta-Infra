@@ -17,11 +17,5 @@ public record Pagination(Long page, Long size){
         return new Page<>(this.page, this.size);
     }
 
-    public static <T> Page<T> DEFAULT() {
-        return new Page<>(1L, 10L);
-    }
-
-    public static <T> Page<T> ALL() {
-        return new Page<>(1L, 1000L);
-    }
+    public static final Pagination DEFAULT = new Pagination(1L, 10L);
 }
